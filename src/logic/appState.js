@@ -1,6 +1,4 @@
-import { Todo } from "./todoObj.js";
-import { Project } from "./projectObj.js";
-import { ProjectStorage } from "./projectStorage.js";
+import { Todo, Project, ProjectStorage } from "./classes.js";
 
 export const defaultProjectStorage = new ProjectStorage();
 
