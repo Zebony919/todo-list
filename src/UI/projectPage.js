@@ -1,4 +1,5 @@
 import { defaultProjectStorage } from "../logic/appState.js";
+import { loadTaskPage } from "./taskPage.js";
 
 export function loadProjectPage() {
     const display = document.querySelector(".display");
@@ -23,14 +24,20 @@ export function loadProjectPage() {
         projectDiv.className = "project";
         buttons.className = "buttons";
         openButton.className = "openBtn";
-        openButton.id = "openBtn";
         deleteButton.className = "deleteBtn";
-        deleteButton.id = "deleteBtn";
 
         projectName.textContent = project.name;
         projectTaskAmount.textContent = "Tasks: " + project.todoArray.length;
         openButton.textContent = "open";
         deleteButton.textContent = "delete";
+
+        openButton.addEventListener("click", () => {
+            loadTaskPage(project);
+        });
+
+        deleteButton.addEventListener("click", () => {
+            /* Delete project */
+        })
 
         projectDiv.appendChild(projectName);
         projectDiv.appendChild(projectTaskAmount);
