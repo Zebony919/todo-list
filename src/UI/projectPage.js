@@ -36,7 +36,8 @@ export function loadProjectPage() {
         });
 
         deleteButton.addEventListener("click", () => {
-            /* Delete project */
+            defaultProjectStorage.deleteProject(project);
+            loadProjectPage();
         })
 
         projectDiv.appendChild(projectName);
