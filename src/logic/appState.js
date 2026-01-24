@@ -1,12 +1,19 @@
 import { Todo, Project, ProjectStorage } from "./classes.js";
+import { loadState } from "./persistence.js";
 
-export const defaultProjectStorage = new ProjectStorage();
+export let defaultProjectStorage;
 
-const myProject = new Project("Default");
-defaultProjectStorage.addProject(myProject);
+const loadedStorage = loadState();
 
-const task1 = new Todo("Buy milk", "From store", "2024-01-23", "high");
-const task2 = new Todo("Walk the dog", "In the park", "2025-13-09", "medium");
+if (loadedStorage) {
+    defaultProjectStorage = loadedStorage;
+} else {
+    defaultProjectStorage = new ProjectStorage();
 
-myProject.addTodo(task1);
-myProject.addTodo(task2);
+    const myProject = new Project("Default");
+    defaultProjectStorage.addProject(myProject);
+    defaultProjectStorage.changeCurrentProject(myProject);
+
+    const task1 = new Todo("Buy milk", "From store", "2024-01-23", "high");
+    myProject.addTodo(task1);
+}

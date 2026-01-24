@@ -1,5 +1,6 @@
 import { defaultProjectStorage } from "../logic/appState.js";
 import { loadTaskPage } from "./taskPage.js";
+import { saveState } from "../logic/persistence.js";
 
 export function loadProjectPage() {
     const display = document.querySelector(".display");
@@ -37,6 +38,7 @@ export function loadProjectPage() {
 
         deleteButton.addEventListener("click", () => {
             defaultProjectStorage.deleteProject(project);
+            saveState(defaultProjectStorage);
             loadProjectPage();
         })
 

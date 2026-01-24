@@ -2,6 +2,7 @@ import { defaultProjectStorage } from "../logic/appState.js";
 import { Todo, Project } from "../logic/classes.js";
 import { loadProjectPage } from "./projectPage.js";
 import { loadTaskPage } from "./taskPage.js";
+import { saveState } from "../logic/persistence.js";
 
 export function newProjectForm() {
     const modal = document.createElement("div");
@@ -49,6 +50,7 @@ export function newProjectForm() {
 
         const newProject = new Project(projectName);
         defaultProjectStorage.addProject(newProject);
+        saveState(defaultProjectStorage);
         loadProjectPage();
 
         modal.remove();
@@ -121,6 +123,7 @@ export function newTaskForm(project) {
 
         const newTask = new Todo(taskName, description, date, "low");
         project.addTodo(newTask);
+        saveState(defaultProjectStorage);
         loadTaskPage(project);
 
         modal.remove();
