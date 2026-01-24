@@ -17,7 +17,7 @@ export function loadTaskPage(project) {
     newTaskBtn.textContent = "+";
 
     newTaskBtn.addEventListener("click", () => {
-        newTaskForm();
+        newTaskForm(project);
     })
 
     header.appendChild(title);
@@ -28,14 +28,28 @@ export function loadTaskPage(project) {
 
     for (const task of project.todoArray) {
         const taskDiv = document.createElement("div");
-        const taskName = document.createElement("p");
-
         taskDiv.className = "task";
-        taskName.className = "taskName";
 
+        const taskName = document.createElement("p");
+        taskName.className = "taskName";
         taskName.textContent = task.title;
 
+        const dueDate = document.createElement("p");
+        dueDate.className = "dueDate";
+        dueDate.textContent = "Due: " + task.dueDate;
+
+        const completeBtn = document.createElement("button");
+        completeBtn.className = "completeBtn";
+        completeBtn.textContent = "Complete";
+
+        completeBtn.addEventListener("click", () => {
+            project.deleteTodo(task);
+            loadTaskPage(project);
+        })
+
         taskDiv.appendChild(taskName);
+        taskDiv.appendChild(dueDate);
+        taskDiv.appendChild(completeBtn);
         taskHolder.appendChild(taskDiv);
     }
 
