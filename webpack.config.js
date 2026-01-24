@@ -2,14 +2,23 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: "./src/index.js",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/todo-list/",
+    publicPath: "/",
     clean: true,
   },
+  devServer: { 
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    hot: true,
+    port: 8080,
+    open: true,
+    historyApiFallback: true,
+  }, 
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
